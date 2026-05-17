@@ -20,7 +20,7 @@ searchBtn.addEventListener("click", async () => {
         return;
     }
 
-    const apiKey = "YOUR_API_KEY";
+    const apiKey = "0c1a0cf982cffcf3dc10d55345c4b457";
 
     const url = https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric;
 
