@@ -1,93 +1,53 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+const cityInput = document.getElementById("cityInput");
 
-body{
-    font-family:Arial,sans-serif;
-    background:linear-gradient(135deg,#0f172a,#1e293b);
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    color:white;
-    padding:20px;
-}
+const searchBtn = document.getElementById("searchBtn");
 
-.container{
-    width:100%;
-    max-width:450px;
-    background:rgba(255,255,255,0.1);
-    backdrop-filter:blur(10px);
-    border:1px solid rgba(255,255,255,0.1);
-    border-radius:20px;
-    padding:30px;
-    box-shadow:0 0 25px rgba(0,0,0,0.3);
-}
+const cityName = document.getElementById("cityName");
 
-h1{
-    text-align:center;
-    margin-bottom:25px;
-    font-size:2.2rem;
-}
+const temperature = document.getElementById("temperature");
 
-.search-box{
-    display:flex;
-    gap:10px;
-    margin-bottom:25px;
-}
+const description = document.getElementById("description");
 
-#cityInput{
-    flex:1;
-    padding:14px;
-    border:none;
-    outline:none;
-    border-radius:12px;
-    font-size:1rem;
-}
+const humidity = document.getElementById("humidity");
 
-#searchBtn{
-    padding:14px 20px;
-    border:none;
-    border-radius:12px;
-    background:#38bdf8;
-    color:white;
-    cursor:pointer;
-    transition:0.3s;
-    font-weight:bold;
-}
+const wind = document.getElementById("wind");
 
-#searchBtn:hover{
-    transform:scale(1.05);
-    opacity:0.9;
-}
+searchBtn.addEventListener("click", async () => {
 
-.weather-card{
-    background:rgba(255,255,255,0.08);
-    border-radius:16px;
-    padding:25px;
-    text-align:center;
-}
+    const city = cityInput.value;
 
-.weather-card h2{
-    margin-bottom:15px;
-    font-size:2rem;
-}
-
-.weather-card p{
-    margin:12px 0;
-    font-size:1.1rem;
-}
-
-@media(max-width:500px){
-
-    .search-box{
-        flex-direction:column;
+    if(city === ""){
+        return;
     }
 
-    #searchBtn{
-        width:100%;
+    const apiKey = "PASTE_YOUR_API_KEY_HERE";
+
+    const url = https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric;
+
+    try{
+
+        const response = await fetch(url);
+
+        const data = await response.json();
+
+        console.log(data);
+
+        cityName.textContent = data.name;
+
+        temperature.textContent = Temperature: ${data.main.temp}°C;
+
+        description.textContent = Condition: ${data.weather[0].description};
+
+        humidity.textContent = Humidity: ${data.main.humidity}%;
+
+        wind.textContent = Wind Speed: ${data.wind.speed} km/h;
+
     }
 
-}
+    catch(error){
+
+        alert("Something went wrong");
+
+    }
+
+});
